@@ -4,7 +4,7 @@ from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.behaviors import ButtonBehavior
-from itertools import chain
+
 
 class Board(GridLayout):
 
@@ -18,10 +18,8 @@ class Board(GridLayout):
         self.col_default_width = 80
         self.col_force_default = True 
         self.matrix_of_buttons = []
-        image_behavior = ImageButton()    
-    
-        self.matrix_of_buttons = [[Button(text = ' ', size=(80, 80), background_normal="Images//empty.png") for j in range(self.cols)] for i in range(self.rows)]
-  
+        self.matrix_of_buttons = [[Button(text=' ', size=(80, 80), background_normal="Images//empty.png") for j in range(self.cols)] for i in range(self.rows)]
+
         i = 0
         j = 0
         while (i < 8):
@@ -31,21 +29,27 @@ class Board(GridLayout):
                 j += 1  
             i += 1    
 
-        image_behavior.on_press()
-        # self.change_board()
+        # image_behavior.on_press()
+        self.change_board()
+        
     def insert_buttons_on_grid(self, pos_i, pos_j):
         self.add_widget(self.matrix_of_buttons[pos_i][pos_j])
-
-            
+        
     def change_board(self):
-        self.clear_widgets()
-           
-        for i in range(63):
-            self.add_widget(Image(source=("Images//empty.png"), allow_stretch=True, keep_ratio=False))
-  
-        self.add_widget(Image(source=("Images//black0.png"), allow_stretch=True, keep_ratio=False), 33, None)      
+        self.remove_widget(self.matrix_of_buttons[3][4])
+        self.remove_widget(self.matrix_of_buttons[0][1])
+        self.remove_widget(self.matrix_of_buttons[0][2])
+        self.remove_widget(self.matrix_of_buttons[0][3])
+        self.matrix_of_buttons[3][4] = Button(text=' ', size=(80, 80), background_normal="Images//black0.png")
+        self.matrix_of_buttons[0][1] = Button(text=' ', size=(80, 80), background_normal="Images//white0.png")     
+        self.matrix_of_buttons[0][2] = Button(text=' ', size=(80, 80), background_normal="Images//white0.png")     
+        self.matrix_of_buttons[0][3] = Button(text=' ', size=(80, 80), background_normal="Images//black0.png")       
+        self.add_widget(self.matrix_of_buttons[3][4], 27, None)
+        self.add_widget(self.matrix_of_buttons[0][1], 28, None)
+        self.add_widget(self.matrix_of_buttons[0][2], 35, None)
+        self.add_widget(self.matrix_of_buttons[0][3], 36, None)
 
-            
+           
 class CompleteWindow(FloatLayout, ButtonBehavior):
 
     def __init__(self, **kwargs):
