@@ -4,8 +4,7 @@ from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.behaviors import ButtonBehavior
-from kivy.modules._webdebugger import background_jpg
-
+from itertools import chain
 
 class Board(GridLayout):
 
@@ -13,23 +12,30 @@ class Board(GridLayout):
         super(Board, self).__init__(**kwargs) 
         self.cols = 8     
         self.rows = 8   
-        # rows_cols = [self.rows][self.cols]
         self.padding = 40
         self.spacing = 2
         self.row_default_height = 80
         self.col_default_width = 80
-        self.col_force_default = True     
-        list_of_buttons = []
+        self.col_force_default = True 
+        self.matrix_of_buttons = []
         image_behavior = ImageButton()    
-        
-        for i in range(64):
-            button = Button(text = ' ', size=(80, 80), background_normal="Images//empty.png")
-            list_of_buttons.append(button)
+    
+        self.matrix_of_buttons = [[Button(text = ' ', size=(80, 80), background_normal="Images//empty.png") for j in range(self.cols)] for i in range(self.rows)]
+  
+        i = 0
+        j = 0
+        while (i < 8):
+            j = 0
+            while(j < 8):
+                self.insert_buttons_on_grid(i, j)    
+                j += 1  
+            i += 1    
 
-        for i in range(self.cols * self.rows):
-            self.add_widget(list_of_buttons[i])
-            image_behavior.on_press()
+        image_behavior.on_press()
         # self.change_board()
+    def insert_buttons_on_grid(self, pos_i, pos_j):
+        self.add_widget(self.matrix_of_buttons[pos_i][pos_j])
+
             
     def change_board(self):
         self.clear_widgets()
