@@ -46,15 +46,19 @@ class CompleteWindow(FloatLayout, ButtonBehavior):
         super(CompleteWindow, self).__init__(**kwargs)
         gl = Board()
         self.orientation = 'horizontal'
-        btn1 = Button(text='New Game', size_hint=(.20, .12), pos=(950, 500))
-        btn2 = Button(text='Player x Player', size_hint=(.20, .12), pos=(950, 400))
-        btn3 = Button(text='Player x Computer', size_hint=(.20, .12), pos=(950, 300))
-        btn4 = Button(text='Computer x Computer', size_hint=(.20, .12), pos=(950, 200))
+        btn_new_game = Button(text='New Game', size_hint=(.20, .12), pos=(950, 500))
+        btn_easy = Button(text='Easy', size_hint=(.10, .12), pos=(950, 410))
+        btn_hard = Button(text='Hard', size_hint=(.10, .12), pos=(1088, 410))
+        btn_player_x_player = Button(text='Player x Player', size_hint=(.20, .12), pos=(950, 320))
+        btn_player_x_computer = Button(text='Player x Computer', size_hint=(.20, .12), pos=(950, 230))
+        btn_computer_x_computer = Button(text='Computer x Computer', size_hint=(.20, .12), pos=(950, 140))
         self.add_widget(gl)
-        self.add_widget(btn1)
-        self.add_widget(btn2)
-        self.add_widget(btn3)
-        self.add_widget(btn4)
+        self.add_widget(btn_new_game)
+        self.add_widget(btn_easy)
+        self.add_widget(btn_hard)
+        self.add_widget(btn_player_x_player)
+        self.add_widget(btn_player_x_computer)
+        self.add_widget(btn_computer_x_computer)
 
 
 class ImageButton(ButtonBehavior):
