@@ -13,7 +13,7 @@ class TicTacToe(App):
     def build(self):
         Window.clearcolor = (.5, 0, 0, 1)
         Window.size = (600, 600)
-        self.board = Board(cols=3)
+        self.board = Board(cols=8)
         self.title = 'Velha'
         
         return self.board
