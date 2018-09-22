@@ -1,6 +1,5 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.behaviors import ButtonBehavior
@@ -12,7 +11,7 @@ class Board(GridLayout):
         super(Board, self).__init__(**kwargs) 
         self.cols = 8     
         self.rows = 8   
-        self.padding = 40
+        self.padding = 20
         self.spacing = 2
         self.row_default_height = 80
         self.col_default_width = 80
@@ -30,7 +29,9 @@ class Board(GridLayout):
             i += 1    
 
         # image_behavior.on_press()
+        
         self.change_board()
+        
         
     def insert_buttons_on_grid(self, pos_i, pos_j):
         self.add_widget(self.matrix_of_buttons[pos_i][pos_j])
@@ -69,15 +70,23 @@ class CompleteWindow(FloatLayout, ButtonBehavior):
         self.add_widget(btn_player_x_player)
         self.add_widget(btn_player_x_computer)
         self.add_widget(btn_computer_x_computer)
-
-
-class ImageButton(ButtonBehavior):
-
-    def __init__(self):
-        super(ImageButton, self).__init__
+        ImageButton(btn_easy)
         
-    def on_press(self):
-        print("pressed")
+    
+
+class ImageButton(ButtonBehavior, Board):
+
+    def __init__(self,button,**kwargs):
+        super(ImageButton, self).__init__(**kwargs)
+        button.bind(on_press=self.clk) 
+       
+
+    def clk (self, object):
+        print('Pressed')
+    
+
+        
+
 
 
 class MyApp(App):
